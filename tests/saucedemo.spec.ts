@@ -197,5 +197,22 @@ test('Bonus — Cart keeps item after refresh', async ({ page }) => {
   ).toHaveText('1');
 });
 
+test('Locked out user should see error message', async ({ page }) => {
+
+  await page.locator('#user-name').fill('locked_out_user');
+
+  await page.locator('#password').fill(PASSWORD);
+
+  await page.locator('#login-button').click();
+
+  await expect(
+    page.locator('[data-test="error"]'),
+    'Locked out user should see lockout error message'
+  ).toContainText(
+    'Epic sadface: Sorry, this user has been locked out.'
+  );
+// temporary change
+});
+
 
 });
