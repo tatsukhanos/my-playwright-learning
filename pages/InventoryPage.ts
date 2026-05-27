@@ -4,11 +4,15 @@ export class InventoryPage {
   readonly page: Page;
   readonly cartBadge: Locator;
   readonly cartLink: Locator;
+  readonly sortDropdown: Locator;
+  readonly productPrices: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.cartBadge = page.locator('.shopping_cart_badge');
     this.cartLink = page.locator('.shopping_cart_link');
+    this.sortDropdown = page.locator('[data-test="product-sort-container"]');
+    this.productPrices = page.locator('[data-test="inventory-item-price"]');
   }
 
   async addBackpackToCart() {
@@ -26,4 +30,16 @@ export class InventoryPage {
   async openCart() {
     await this.cartLink.click();
   }
+  async sortByPriceLowToHigh() {
+  await this.sortDropdown.selectOption('lohi');
+}
+
+async getProductPrices() {
+  const pricesText = await this.productPrices.allTextContents();
+
+  return pricesText.map((price) =>
+    Number(price.replace('$', ''))
+  );
+}
+
 }
