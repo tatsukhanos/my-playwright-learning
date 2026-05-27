@@ -211,7 +211,6 @@ test('Locked out user should see error message', async ({ page }) => {
   ).toContainText(
     'Epic sadface: Sorry, this user has been locked out.'
   );
-// temporary change
 });
 
 

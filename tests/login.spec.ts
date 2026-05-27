@@ -3,13 +3,13 @@ import { LoginPage } from '../pages/LoginPage';
 import { users } from '../test-data/users';
 
 
-test.describe('SauceDemo tests', () => {
+test.describe('Login behavior', () => {
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.open();
   });
 
-  test('Test 1 - Valid user can log in and see inventory page', async ({ page }) => {
+  test('Test 1.1 - Valid user can log in and see inventory page', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
     await loginPage.login(
@@ -23,7 +23,7 @@ test.describe('SauceDemo tests', () => {
     ).toHaveURL(/inventory/);
   });
 
-  test('Test 2 - Locked out user cannot log in and sees error message', async ({ page }) => {
+  test('Test 1.2 - Locked out user cannot log in and sees error message', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
    await loginPage.login(
@@ -37,7 +37,7 @@ test.describe('SauceDemo tests', () => {
     ).toContainText('Epic sadface: Sorry, this user has been locked out.');
   });
 
-test('Test 3 - Wrong password shows error message', async ({ page }) => {
+test('Test 1.3 - Wrong password shows error message', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.login(
@@ -51,7 +51,7 @@ test('Test 3 - Wrong password shows error message', async ({ page }) => {
   ).toContainText('Username and password do not match');
 });
 
-test('Test 4 - Empty username shows validation error', async ({ page }) => {
+test('Test 1.4 - Empty username shows validation error', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.login(
